@@ -7,10 +7,10 @@ def create_dataframe():
 
     # Declare columns to be used
     ps_columns = ['Major', 'Minor', 'SalePrice']
-    b_columns = ['Major', 'Minor', 'SqFt1stFloor', 'SqFt2ndFloor' 'SqFtTotLiving', 
+    b_columns = ['Major', 'Minor', 'SqFt1stFloor', 'SqFt2ndFloor', 'SqFtTotLiving', 
             'SqFtOpenPorch', 'SqFtEnclosedPorch']
     p_columns = ['Major', 'Minor', 'TrafficNoise',
-             'AirportNoise', 'PowerLines', 'OtherNuisances', 'Tideland/Shoreland', 'PresentUse']
+             'AirportNoise', 'PowerLines', 'OtherNuisances', 'TidelandShoreland', 'PresentUse']
 
     # Filter for 2019
     ps_df = get_homes_by_year(ps_df, 2019)
