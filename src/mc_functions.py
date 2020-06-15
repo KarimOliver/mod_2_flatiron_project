@@ -7,10 +7,10 @@ def create_dataframe():
 
     # Declare columns to be used
     ps_columns = ['Major', 'Minor', 'SalePrice']
-    b_columns = ['Major', 'Minor', 'SqFt1stFloor', 'SqFtTotLiving', 
-            'SqFtOpenPorch', 'SqFtEnclosedPorch', 'SqFtGarageAttached', 'NbrLivingUnits']
-    p_columns = ['Major', 'Minor', 'SqFtLot', 'TrafficNoise',
-             'AirportNoise', 'PowerLines', 'OtherNuisances', 'NbrBldgSites']
+    b_columns = ['Major', 'Minor', 'SqFt1stFloor', 'SqFt2ndFloor' 'SqFtTotLiving', 
+            'SqFtOpenPorch', 'SqFtEnclosedPorch']
+    p_columns = ['Major', 'Minor', 'TrafficNoise',
+             'AirportNoise', 'PowerLines', 'OtherNuisances', 'Tideland/Shoreland', 'PresentUse']
 
     # Filter for 2019
     ps_df = get_homes_by_year(ps_df, 2019)
@@ -96,10 +96,6 @@ def add_model_columns(df):
     # Create binary porch column
     has_porch = [1 if ((op > 0) | (ep > 0)) else 0 for op, ep in zip(df['SqFtOpenPorch'], df['SqFtEnclosedPorch'])]
     df['has_porch'] = has_porch
-
-    # add column for proportion of lot taken up by house
-    df['total_ground_sq_ft'] = df['SqFt1stFloor'] + df['SqFtGarageAttached']
-    df['prop_lot'] = df['total_ground_sq_ft']/df['SqFtLot']
 
     return df
 
