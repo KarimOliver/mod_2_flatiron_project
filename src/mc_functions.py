@@ -70,7 +70,7 @@ def create_dataframe():
     ps_df, b_df, p_df = create_initial_dataframes()
 
     # Declare columns to be used
-    ps_columns = ['Major', 'Minor', 'SalePrice', 'PropertyType']
+    ps_columns = ['Major', 'Minor', 'SalePrice', 'PropertyClass']
     b_columns = ['Major', 'Minor', 'SqFtTotLiving', 'SqFtOpenPorch', 'SqFtEnclosedPorch']
     p_columns = ['Major', 'Minor', 'TrafficNoise', 'PowerLines', 'OtherNuisances', 'TidelandShoreland']
 
