@@ -70,14 +70,12 @@ def create_dataframe():
     ps_df, b_df, p_df = create_initial_dataframes()
 
     # Declare columns to be used
-    ps_columns = ['Major', 'Minor', 'SalePrice']
-    b_columns = ['Major', 'Minor', 'SqFt1stFloor', 'SqFt2ndFloor', 'SqFtTotLiving', 
-            'SqFtOpenPorch', 'SqFtEnclosedPorch']
-    p_columns = ['Major', 'Minor', 'TrafficNoise',
-             'AirportNoise', 'PowerLines', 'OtherNuisances', 'TidelandShoreland', 'PresentUse']
+    ps_columns = ['Major', 'Minor', 'SalePrice', 'PropertyType']
+    b_columns = ['Major', 'Minor', 'SqFtTotLiving', 'SqFtOpenPorch', 'SqFtEnclosedPorch']
+    p_columns = ['Major', 'Minor', 'TrafficNoise', 'PowerLines', 'OtherNuisances', 'TidelandShoreland']
 
     # Filter for 2019
-    year = [True if int(d[6:]) == year else False for d in df['DocumentDate']]
+    year = [True if int(d[6:]) == 2019 else False for d in ps_df['DocumentDate']]
     ps_df = ps_df[year]
 
     # Format leading zeros on major and minor codes
