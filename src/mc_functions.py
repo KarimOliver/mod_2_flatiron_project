@@ -13,8 +13,14 @@ import statsmodels.stats.diagnostic as at
 def create_initial_dataframes():
     ''' Creates initial dataframes from downloaded .csv files
 
-    The project required data from three different datasets. 
+    The project required data from three different datasets. Utilizing 
+    the data_download notebook we stored the .csv files under the src/
+    directory. This function stores those .csv files in dataframes.
 
+    Returns:
+        ps_df: dataframe made from Real Property Sales file
+        b_df: dataframe made from Residential Building files
+        p_df: dataframe made from Parcel file
     '''
     ps_df = pd.read_csv('../../data/EXTR_RPSale.csv')
     b_df = pd.read_csv('../../data/EXTR_ResBldg.csv')
@@ -23,6 +29,20 @@ def create_initial_dataframes():
     return ps_df, b_df, p_df
 
 def add_major_leading_zeros(majors):
+    ''' Add's leading zeroes to 'Major'
+
+    Take's in the 'Major' column of a dataframe and add's
+    leading zeroes if necessary. 'Major' code should have a
+    length of 6, if it's shorter than that this function
+    add's zeroes in front to make it length 6.
+
+    Args:
+        majors: pandas series of 'Major' codes 
+    
+    Returns:
+        f_majors: list of 'Major' codes formatted with
+                  leading zeroes
+    '''
     # Empty list to store formatted major codes in
     f_majors = []
     
@@ -44,6 +64,20 @@ def add_major_leading_zeros(majors):
     return f_majors
 
 def add_minor_leading_zeros(minors):
+    ''' Add's leading zeroes to 'Minor'
+
+    Take's in 'Minor' column of a dataframe and add's
+    leading zeros if necessary. 'Minor' code should have a
+    length of 4, if it's shorter than that this function
+    add's zeroes in front to make it length 4
+
+    Args:
+        minors: pandas series of 'Minor' codes
+
+    Returns:
+        f_minors: list of 'Minor' codes formatted with
+                  leading zeroes
+    '''
     # Empty list to store formatted minor codes in
     f_minors = []
     
@@ -65,19 +99,72 @@ def add_minor_leading_zeros(minors):
     return f_minors
 
 def add_leading_zeros(majors, minors):
+    ''' Call's add_leading_zeroes functions
+
+    Takes in two pandas series, 'Major' and 'Minor'
+    columns and calls add_major_leading_zeros and 
+    add_minor_leading_zeros respectively.
+
+    Args:
+        majors: pandas series of 'Major' codes
+        minors: pandas series of 'Minor' codes
+
+    Returns:
+        formatted 'Major' and 'Minor' codes
+
+    '''
     return add_major_leading_zeros(majors), add_minor_leading_zeros(minors)
 
 def merge_dataframes(df1, df2, df3, type, cols):
+    ''' Creates one dataframe from three passed in dataframes
+
+    Function takes in three dataframes, type of merge, and
+    columns to merge them on. It then returns a single dataframe
+    merged from the three arguement dataframes.
+
+    Args:
+        df1, df2, df3: three dataframes to merge together
+        type: the type of merge to execute
+        cols: columns to merge dataframes on
+    
+    Returns:
+        df: merged dataframe
+
+    '''
     df = df1.merge(df2, how=type, on=cols).merge(df3, how=type, on=cols)
     return df
 
 def encode_column(col):
+    ''' Use's LabelEncoder to create binary column
+
+    Take's in a categorical column and uses LabelEncoder
+    to create a numeric column
+
+    Args:
+        col: column to be encoded
+    
+    Returns:
+        encoded column
+
+    '''
     le = LabelEncoder()
 
     encoded = le.fit_transform(list(col))
     return pd.Series(encoded)
 
 def create_dataframe():
+    ''' Creates dataframe required for our analysis
+
+    Function calls other functions to create, filter, and merge the data
+    required for our analysis into a single dataframe. Filters for sale's
+    from 2019 only. Filters for the specific columms we need from each 
+    individual dataframe. Add's two binary columns, 'has_porch' and 'on_water'
+    and encodes necessary columns
+
+    Returns:
+        df: formatted dataframe for analysis
+
+    '''
     ps_df, b_df, p_df = create_initial_dataframes()
 
     # Declare columns to be used
@@ -110,19 +197,60 @@ def create_dataframe():
     return df
 
 def plot_dist(x):
+    ''' creates distplot and boxplot of distribution
+
+    Function takes in a sequence and produces two visuals.
+    A seaborn distplot and a seaborn boxplot that allows for
+    visual analysis of given distribution.
+
+    Args:
+        x: data array
+    
+    Returns:
+        produces distplot and boxplot of given distribution
+    '''
 
     fig, ax = plt.subplots(2, 1, figsize=(10,12))
     sns.distplot(x, ax=ax[0])
     sns.boxplot(x, ax=ax[1])
 
 def z_score(x, mean, std):
+    '''Computes z-score from given mean, standard deviationa, and data point
+
+    Function calculates z-score from given mean,
+    standard deviation, and data point passed in.
+
+    Args:
+        x: data point to compute z-score of
+        mean: mean of population
+        std: standard deviation of population
+    
+    Returns:
+        z: z-score of given data point
+
+    '''
     z = (x-mean)/std
     return z
 
 def corr_heatmap(df):
+
     sns.heatmap(df.corr())
 
 def create_model(features, target):
+    '''Creates model from given features and target
+
+    Function takes in feature variables and target variable
+    and creates a linear regression model utilizing 
+    statsmodels.api OLS function.
+
+    Args:
+        features: feature variables for model
+        target: target variable for model
+    
+    Returns:
+        model: linear regression model
+
+    '''
     model = sm.OLS(target, features).fit()
     return model
 
