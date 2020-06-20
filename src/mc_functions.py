@@ -255,6 +255,22 @@ def create_model(features, target):
     return model
 
 def test_assumptions(df, model, ivar):
+    '''Test linear regression assumptions of given model
+
+    Function takes in a linear regression model, model dataframe,
+    and a list of independent variables and performs the 4 assumption
+    test for linear regression. Performs a rainbow fit test to check
+    for linearity, jarque bera test to check normality, breusch-pagan
+    test to check for homoscedasticity, and the variance inflation
+    factor to check for independence. Prints output to screen.
+
+    Args:
+        df: dataframe used to create model
+        model: linear regression model
+        ivar: list of feature variables
+
+    '''
+
     # model residuals
     resids = model.resid
 
@@ -284,7 +300,7 @@ def test_assumptions(df, model, ivar):
     print('Breusch Pagan test statistic: {}\nBreusch Pagan p-value: {}'.format(bp_test[0], bp_test[1]))
 
     # Variance Inflation Factor (VIF) to check for independence
-    # vif_features = pd.DataFrame()
-    # vif_features['vif'] = [vif(idv_df.values, i) for i in range(idv_df.shape[1])]
-    # vif_features['features'] = idv_df.columns
-    # print('VIF: {}'.format(vif_features.vif.mean()))
+    vif_features = pd.DataFrame()
+    vif_features['vif'] = [vif(idv_df.values, i) for i in range(idv_df.shape[1])]
+    vif_features['features'] = idv_df.columns
+    print('VIF: {}'.format(vif_features.vif.mean()))
