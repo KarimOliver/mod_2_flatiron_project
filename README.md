@@ -1,12 +1,12 @@
 # Table of Contents
-- [Exploratory Notebooks]
-- [Report Notebook]
-- [Project Presentation]
-- [Data download]
-- [src/ directory with project source code]
-- [figures/ directory with project visuals]
-- [Data references]
-- [Project Conda environment]
+- [Exploratory Notebooks](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/notebooks/exploratory)
+- [Report Notebook](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/notebooks/report)
+- [Project Presentation]()
+- [Data download](https://github.com/mattcarr17/mod_2_flatiron_project/blob/master/notebooks/exploratory/01_mc_data_download.ipynb)
+- [src/ directory with project source code](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/src)
+- [figures/ directory with project visuals](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/report/figures)
+- [Data references](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/references)
+- [Project Conda environment](https://github.com/mattcarr17/mod_2_flatiron_project/blob/master/environment.yml)
 
 # Context of Project
 Our project task was to create a linear regression model providing insight into what influenced the sale price of homes in King County. Specifically, we wanted to explore the effect having a porch, being on the waterfront, and the presence of nuisances (power lines, traffic noise, airport noise, etc) had on home sale price. In order to accomplish the project task we created a multiple linear regression model to determine what influence each of these had on the sale price of a home. In addition to these three claims we also explored the effects of location and home quality.
