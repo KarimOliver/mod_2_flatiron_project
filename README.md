@@ -74,6 +74,7 @@ After exploring the correlation of different variables with the sale price of a 
 The final model contained the columns on Building Grade, number of living units, waterfront location, bath count, tideland and shoreland, township, porch, and presence of nuisances. For the final model we encoded all of these categorical variables and power transformed the sale price data.
 
 # Baseline Model
+The baseline model predicted the home sale price based on total square footage.
 
 # Final Model
 
