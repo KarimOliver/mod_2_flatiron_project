@@ -1,8 +1,20 @@
-import os
 import pandas as pd
+import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+import statsmodels.api as sm
+import scipy.stats as stats
+from sklearn.datasets import make_regression
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import power_transform
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import statsmodels.api as sm
+import scipy.stats as stats
+from sklearn.model_selection import train_test_split
+
 
 def create_initial_dataframes():
     ps_df = pd.read_csv('../../data/EXTR_RPSale.csv')
@@ -145,3 +157,13 @@ def forward_selected(data, response):
                                    ' + '.join(selected))
     model = smf.ols(formula, data).fit()
     return model
+
+def multi_coll(df):
+    corr_df = df.corr().abs().stack().reset_index().sort_values(0, ascending=False)
+    corr_df['pairs'] = list(zip(corr_df.level_0, corr_df.level_1))
+    corr_df.set_index(['pairs'], inplace=True)
+    corr_df.drop(columns=['level_1', 'level_0'], inplace=True)
+    corr_df.columns = ['corrcoeff']
+    corr_df.drop_duplicates(inplace=True)
+    corr_df[(corr_df.corrcoeff>.2) & (corr_df.corrcoeff<1)]
+    return corr_df
