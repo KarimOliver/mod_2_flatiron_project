@@ -89,6 +89,7 @@ The final model contained the columns on Building Grade, number of living units,
 # Baseline Model
 The baseline model predicted the home sale price based on total square footage. The model had a R-Squared of .84 and a JB OF (27,295.9). The predictor variable, total living sqft had a p-value of 0, indicating it was statistically significant. The model failed to meet the assumptions.
 
+
 ![](./report/figures/saleprice_totsqft_living.png)
 
 # Final Model
@@ -108,6 +109,8 @@ The final model was an attempt at addressing the 3 claims. The variables we chos
 - Encoded Other Nuisances
 All of the variables had a p-value less than .025, indicating they were statistically significant for the model.
 The model had a R-Squared of .64 and a JB of (95.62).
+
+About 64 percent of the variations in sale price are explained by the predictor variables in our model.
 
 Rainbow test statistic: 1.0040602671788623
 Rainbow test p-value: 0.4094584520205275
