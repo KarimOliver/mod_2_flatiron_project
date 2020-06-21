@@ -29,7 +29,7 @@ The graph shows the distribution of home sale price in King County. As mentioned
 
 One thing we wanted to explore was the effects of home quality on home price. To do this we utlized the Building Grade column, which divided up the homes as follows:
 
-![](.report/figures/mc_average_sale_price_per_building_grade.png)
+![](.report/figures/mc_average_price_per_building_grade.png)
 
 As you can see from the graph above, the average sale price of a home varies depending on the type of home and the quality. This is valuable information as home buyers can see the average sale price of a home according to their home type interest. If a wealthy homebuyer is looking for a mansion or nice luxurious home, they can expect to spend around $2 million to $3 million dollars. If someone was looking for an nice, average home they could expect to spend $400,000 to $1 million. For someone who is looking for a lower quality home as a resell opportunity, they can expect to spend between $50,000 to $200,000.
 
