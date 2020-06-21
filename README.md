@@ -110,7 +110,7 @@ The final model was an attempt at addressing the 3 claims. The variables we chos
 All of the variables had a p-value less than .025, indicating they were statistically significant for the model.
 The model had a R-Squared of .64 and a JB of (95.62).
 
-About 64 percent of the variations in sale price are explained by the predictor variables in our model.
+Around 64 percent of the variations in sale price are explained by the predictor variables in our model.
 
 Rainbow test statistic: 1.0040602671788623
 Rainbow test p-value: 0.4094584520205275
