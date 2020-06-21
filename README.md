@@ -1,7 +1,7 @@
 # Table of Contents
 - [Exploratory Notebooks](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/notebooks/exploratory)
 - [Report Notebook](https://github.com/mattcarr17/mod_2_flatiron_project/blob/master/notebooks/report/final_notebook.ipynb)
-- [Project Presentation]
+- [Project Presentation](https://github.com/mattcarr17/mod_2_flatiron_project/blob/master/report/Presentation.pdf)
 - [Data download](https://github.com/mattcarr17/mod_2_flatiron_project/blob/master/notebooks/exploratory/01_mc_data_download.ipynb)
 - [src/ directory with project source code](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/src)
 - [figures/ directory with project visuals](https://github.com/mattcarr17/mod_2_flatiron_project/tree/master/report/figures)
@@ -23,13 +23,13 @@ After creating our baseline model and following every model iteration, we needed
 # Preview of Results
 The primary purpose of our analysis was to explore the influence of different home features on sale price. Because of this we found it beneficial to have an idea of the different sale prices in King County.
 
-[](./report/figures/mc_sale_price_distribution.png)
+![](./report/figures/mc_sale_price_distribution.png)
 
 The graph shows the distribution of home sale price in King County. As mentioned earlier we tried to taylor our analysis towards the average home buyer. Because of this we investigated home's under $2 million. As you can see from the distribution, homes in King County are rather expensive overall. The majority of homes fall between $400,000 and $1 million. 
 
 One thing we wanted to explore was the effects of home quality on home price. To do this we utlized the Building Grade column, which divided up the homes as follows:
 
-[](.report/figures/mc_average_sale_price_per_building_grade)
+![](.report/figures/mc_average_sale_price_per_building_grade)
 
 As you can see from the graph above, the average sale price of a home varies depending on the type of home and the quality. This is valuable information as home buyers can see the average sale price of a home according to their home type interest. If a wealthy homebuyer is looking for a mansion or nice luxurious home, they can expect to spend around $2 million to $3 million dollars. If someone was looking for an nice, average home they could expect to spend $400,000 to $1 million. For someone who is looking for a lower quality home as a resell opportunity, they can expect to spend between $50,000 to $200,000.
 
@@ -74,9 +74,37 @@ After exploring the correlation of different variables with the sale price of a 
 The final model contained the columns on Building Grade, number of living units, waterfront location, bath count, tideland and shoreland, township, porch, and presence of nuisances. For the final model we encoded all of these categorical variables and power transformed the sale price data.
 
 # Baseline Model
-The baseline model predicted the home sale price based on total square footage.
+The baseline model predicted the home sale price based on total square footage. The model had a R-Squared of .84 and a JB OF (27,295.9). The predictor variable, total living sqft had a p-value of 0, indicating it was statistically significant. The model failed to meet the assumptions.
+
+![](./report/figures/saleprice_totsqft_living.png)
 
 # Final Model
+The final model was an attempt at addressing the 3 claims. The variables we chose to stick with for this model were:
+- Sale Price
+- Encoded Building Grade
+- Encoded Number of Living Units
+- Encoded View of Lake Washington
+- Encoded Full Bath Count
+- Encoded Half Bath Count
+- Encoded Tideland Shoreland
+- Encoded Township
+- Encoded Waterfront Location
+- Encoded Has Porch
+- Encoded Power Lines
+- Encoded Traffic Noise
+- Encoded Other Nuisances
+All of the variables had a p-value less than .025, indicating they were statistically significant for the model.
+The model had a R-Squared of .64 and a JB of (95.62).
+
+Rainbow test statistic: 1.0040602671788623
+Rainbow test p-value: 0.4094584520205275
+JB test statistic: 95.87354233066809
+JB test p-value: 1.5181853721229675e-21
+Breusch Pagan test statistic: 1943.5195735373645
+Breusch Pagan p-value: 0.0
+VIF: 0.6989291545047718
+
+The final model met the linearity and independence assumptions while failing to meet the normality and homoscedasticity assumptions.
 
 # Application and Next Steps
 We hope potential home buyers in King County can use our analysis to make the most informed decision possible when purchasing a home. Our model provided insight on which home features most influenced home price as well as how home price varied across different areas in King County. With this information, a potential home buyer can make a more educated decision on what home features they would most like to have as well as what area they would like to purchase a home given their purchasing budget.
