@@ -1,22 +1,22 @@
-import pandas as pd
-import numpy as np
-import matplotlib
+import pandas as pd #For data manipulation and analysis
+import numpy as np #For data manipulation and analysis
+import matplotlib #For plotting visualizations to better understand our data
 import matplotlib.pyplot as plt
-import seaborn as sns
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
+import seaborn as sns #For quick visuals when checking distributions or assumptions
+\import statsmodels.formula.api as smf
 import statsmodels.api as sm
 import scipy.stats as stats
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import power_transform
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-import statsmodels.api as sm
-import scipy.stats as stats
+from sklearn.preprocessing import power_transform #For power scaling our continous data
+from statsmodels.stats.outliers_influence import variance_inflation_factor #For checking the independence assumption of our model
 from sklearn.model_selection import train_test_split
 
 
 def create_initial_dataframes():
+    '''This function takes in the dataframe
+    csv files and assigns them to variables
+    chosen for the 3 datasets'''
     ps_df = pd.read_csv('../../data/EXTR_RPSale.csv')
     b_df = pd.read_csv('../../data/EXTR_ResBldg.csv')
     p_df = pd.read_csv('../../data/EXTR_Parcel.csv', encoding='latin-1')
@@ -24,6 +24,10 @@ def create_initial_dataframes():
     return ps_df, b_df, p_df
 
 def add_major_leading_zeros(majors):
+    '''This function loops through the rows
+    in the dataframes and adds the leading zeros
+    needed for the major columns so they contain
+    6 values in every row'''
     # Empty list to store formatted major codes in
     f_majors = []
     
@@ -45,6 +49,10 @@ def add_major_leading_zeros(majors):
     return f_majors
 
 def add_minor_leading_zeros(minors):
+    '''This function loops through the rows
+    in the dataframes and adds the leading zeros
+    needed for the minor columns so they contain
+    4 values in every row'''
     # Empty list to store formatted minor codes in
     f_minors = []
     
@@ -73,6 +81,16 @@ def merge_dataframes(df1, df2, df3, type, cols):
     return df
 
 def create_dataframe():
+    '''This function takes in the 3 
+    initial dataframes and combines
+    them into one. It combines the 
+    dataframes using the major and 
+    minor columns as well as removes
+    any rows that are not from 2019.
+    Also creates a column has_porch
+    that is a 1 if the sqft open or enclosed
+    porch columns have a value greater
+    than 0'''
     ps_df, b_df, p_df = create_initial_dataframes()
     
     
@@ -97,6 +115,11 @@ def create_dataframe():
     return df
 
 def dummify(df, column_names):
+    '''This function was created by Joel,
+    it takes in a dataframe and column
+    names to encode. Loops through the
+    columns and utizizes pandas get_dummies
+    to encode the categorical variables.'''
     dataframes = []
     copy_df = df.copy()
     for column in column_names:
@@ -108,6 +131,11 @@ def dummify(df, column_names):
     return pd.concat([copy_df, new_df], axis = 1)
 
 def pow_transformer(df , column_names):
+    '''This function takes in a dataframe
+    and the columns that need to power 
+    scaled. Loops through the columns 
+    power transforms the continuous 
+    variables.'''
     dataframe = []
     copy_df = df.copy()
     for column in column_names:
@@ -121,6 +149,10 @@ def pow_transformer(df , column_names):
 import statsmodels.formula.api as smf
 
 def forward_selected(data, response):
+    '''This function was taken from
+    https://planspace.org/20150423-forward_selection_with_statsmodels/'''
+    
+    
     """Linear model designed by forward selection.
 
     Parameters:
@@ -159,6 +191,11 @@ def forward_selected(data, response):
     return model
 
 def multi_coll(df):
+    '''This function was taken from
+    our learn labs. It takes a dataframe
+    and creates a new dataframe showing
+    the multicollinearity between the 
+    features chosen as predictor variables'''
     corr_df = df.corr().abs().stack().reset_index().sort_values(0, ascending=False)
     corr_df['pairs'] = list(zip(corr_df.level_0, corr_df.level_1))
     corr_df.set_index(['pairs'], inplace=True)
