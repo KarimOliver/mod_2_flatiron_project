@@ -14,9 +14,14 @@ from sklearn.model_selection import train_test_split
 
 
 def create_initial_dataframes():
-    '''This function takes in the dataframe
+    '''This function takes in the data
     csv files and assigns them to variables
-    chosen for the 3 datasets'''
+    chosen for the 3 datasets
+    Returns:
+    ps_df: dataframe made from Real Property Sales file
+    b_df: dataframe made form Residential Building file
+    p_df: dataframe made from Parcel file
+    '''
     ps_df = pd.read_csv('../../data/EXTR_RPSale.csv')
     b_df = pd.read_csv('../../data/EXTR_ResBldg.csv')
     p_df = pd.read_csv('../../data/EXTR_Parcel.csv', encoding='latin-1')
@@ -82,8 +87,9 @@ def merge_dataframes(df1, df2, df3, type, cols):
 
 def create_dataframe():
     '''This function takes in the 3 
-    initial dataframes and combines
-    them into one. It combines the 
+    initial dataframes, type of merge, and
+    the column names to merge
+    them on. It combines the 
     dataframes using the major and 
     minor columns as well as removes
     any rows that are not from 2019.
